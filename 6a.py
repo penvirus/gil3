@@ -5,7 +5,7 @@ from collections import defaultdict
 switch_on = False
 
 def dbg(msg):
-    print '[DEBUG] {0}'.format(msg)
+    print('[DEBUG] {0}'.format(msg))
 
 class Entropy(object):
     def __init__(self):
@@ -36,7 +36,7 @@ def run():
         while True:
             if not switch_on:
                 if current_on:
-                    print '{0:.4f}'.format(ent.final())
+                    print('{0:.4f}'.format(ent.final()))
                     current_on = False
                     ent = None
                     dbg('switch off')
