@@ -30,7 +30,7 @@ struct common_operations {
 	void *(*_PyGILState_Ensure)();
 	void (*_PyGILState_Release)(void *);
 	int (*_PyRun_SimpleString)(const char *);
-	long (*_PyInt_AsLong)(PyObject *);
+	long (*_PyLong_AsLong)(PyObject *);
 	PyObject *(*_PyBool_FromLong)(long);
 	int (*_PyDict_SetItemString)(PyObject *, const char *, PyObject *);
 };
@@ -143,8 +143,8 @@ static int resolve_common_operations(void *handle, struct common_operations *ops
 		goto leave;
 	}
 
-	ops->_PyInt_AsLong = dlsym(handle, "PyInt_AsLong");
-	if (!ops->_PyInt_AsLong) {
+	ops->_PyLong_AsLong = dlsym(handle, "PyLong_AsLong");
+	if (!ops->_PyLong_AsLong) {
 		ERR("failed to dlsym: %s", dlerror());
 		goto leave;
 	}
@@ -215,7 +215,7 @@ void *calc_task(void *arg)
 		ERR("failed to _PyDict_GetItemString");
 		goto leave_python;
 	}
-	ctx->cur_switch_on = ops._PyInt_AsLong(switch_on);
+	ctx->cur_switch_on = ops._PyLong_AsLong(switch_on);
 
 	run_method = ops._PyDict_GetItemString(ctx->calc_main_dict, "run");
 	if (!run_method) {
@@ -302,7 +302,7 @@ void *config_task(void *arg)
 			goto leave_python;
 		}
 
-		if (ops._PyInt_AsLong(calc) != ctx->cur_switch_on) {
+		if (ops._PyLong_AsLong(calc) != ctx->cur_switch_on) {
 			DBG("state changed: from %d to %d", ctx->cur_switch_on, 1 - ctx->cur_switch_on);
 
 			ctx->cur_switch_on = 1 - ctx->cur_switch_on;
