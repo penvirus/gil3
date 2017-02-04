@@ -193,8 +193,8 @@ void *calc_task(void *arg)
 		goto leave;
 	}
 
-	ops._PyEval_InitThreads();
 	ops._Py_InitializeEx(0);
+	ops._PyEval_InitThreads();
 	ops._PyRun_SimpleFileEx(fp, "6a.py", 1 /* closeit, fp will be closed */);
 
 	main_module = ops._PyImport_ImportModule("__main__");
