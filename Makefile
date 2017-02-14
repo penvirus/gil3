@@ -15,15 +15,15 @@ HDRS += common.h
 
 CFLAGS := -Wall -O2 -g -ggdb -I/usr/include/python2.7 -Wno-unused-result 
 CFLAGS += -DDEBUG
-LDFLAGS := -lpthread -lpython2.7
+LDFLAGS := -lpthread
 
 all: $(BINS)
 
 
 1a: 1a.o
-	$(CC) -o $@ $< $(LDFLAGS)
+	$(CC) -o $@ $< $(LDFLAGS) -lpython2.7
 1b: 1b.o
-	$(CC) -o $@ $< $(LDFLAGS)
+	$(CC) -o $@ $< $(LDFLAGS) -lpython2.7
 2a: 2a.o
 	$(CC) -o $@ $< $(LDFLAGS) -ldl
 2b: 2b.o
