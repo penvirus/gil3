@@ -47,6 +47,6 @@ all: $(BINS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -f $(BINS) *.o
+	rm -f $(BINS) *.o *.so
 
 .PHONY: all clean
