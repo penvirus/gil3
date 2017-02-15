@@ -46,8 +46,8 @@ int main()
 	pthread_t t1, t2;
 	PyThreadState *th_state;
 
-	PyEval_InitThreads();
 	Py_Initialize();
+	PyEval_InitThreads();
 
 	PyRun_SimpleString("count = 23345678");
 
