@@ -11,7 +11,6 @@ BINS += 4c
 BINS += 6b
 
 HDRS += common.h
-#HDRS += entropy.h
 
 CFLAGS := -Wall -O2 -g -ggdb -I/usr/include/python2.7 -Wno-unused-result 
 CFLAGS += -DDEBUG
